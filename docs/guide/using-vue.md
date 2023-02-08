@@ -62,7 +62,7 @@ const { page } = useData()
 
 ## Escaping
 
-By default, fenced code blocks are automatically wrapped with `v-pre`. To display raw mustaches or Vue-specific syntax inside inline code snippets or plain text, you need to wrap a paragraph with the `v-pre` custom container:
+By default, fenced code blocks are automatically wrapped with `v-pre`, unless you have set some language with `-vue` suffix like `js-vue` (in that case you can use Vue-style interpolation inside fences). To display raw mustaches or Vue-specific syntax inside inline code snippets or plain text, you need to wrap a paragraph with the `v-pre` custom container:
 
 **Input**
 
@@ -260,3 +260,27 @@ export default {
 **Also see:**
 
 - [Vue.js > Dynamic Components](https://vuejs.org/guide/essentials/component-basics.html#dynamic-components)
+
+## Using Teleports
+
+Vitepress currently has SSG support for teleports to body only. For other targets, you can wrap them inside the built-in `<ClientOnly>` component or inject the teleport markup into the correct location in your final page HTML through [`postRender` hook](../config/app-configs#postrender).
+
+<ModalDemo />
+
+::: details
+<<< @/components/ModalDemo.vue
+:::
+
+```md
+<ClientOnly>
+  <Teleport to="#modal">
+    <div>
+      // ...
+    </div>
+  </Teleport>
+</ClientOnly>
+```
+
+<script setup>
+import ModalDemo from '../components/ModalDemo.vue'
+</script>

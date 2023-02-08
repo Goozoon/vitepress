@@ -38,7 +38,7 @@ A VitePress custom theme is simply an object containing four properties and is d
 interface Theme {
   Layout: Component // Vue 3 component
   NotFound?: Component
-  enhanceApp?: (ctx: EnhanceAppContext) => void
+  enhanceApp?: (ctx: EnhanceAppContext) => Awaitable<void>
   setup?: () => void
 }
 
@@ -213,6 +213,7 @@ Or you could use render function as well.
 
 ```js
 // .vitepress/theme/index.js
+import { h } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 import MyComponent from './MyComponent.vue'
 
@@ -242,6 +243,7 @@ Full list of slots available in the default theme layout:
   - `aside-ads-after`
 - When `layout: 'home'` is enabled via frontmatter:
   - `home-hero-before`
+  - `home-hero-image`
   - `home-hero-after`
   - `home-features-before`
   - `home-features-after`
